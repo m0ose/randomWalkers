@@ -1,0 +1,183 @@
+<!-- 
+this is going to come in handy for this
+        map2.setCenter(new OpenLayers.LonLat(-8233165.3575055, 4980298.21113769), 4);
+map2.getViewPortPxFromLonLat(new OpenLayers.LonLat(-8233165.3575055, 4980298.21113769))
+
+//from http://openlayers.org/dev/examples/kml-pointtrack.js
+    var mercator = new OpenLayers.Projection("EPSG:900913");
+    var geographic = new OpenLayers.Projection("EPSG:4326");
+center: new OpenLayers.LonLat(-93.2735, 44.8349).transform(geographic, mercator),
+
+NOTE : good source of source code
+http://sloweb.org.uk/ollie/heatmap/
+
+ -->
+<html>
+<head>
+<title>open layers with canvas and random walkers</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="openLayers/OpenLayers.js"></script>
+    <script src="overLaytest1.js"></script>
+    <link rel="stylesheet" href="openLayers/theme/default/style_small.css" type="text/css">
+   
+    <script type="text/javascript">
+    var EPSG4326 = new OpenLayers.Projection("EPSG:4326");
+    var EPSG900913 = new OpenLayers.Projection("EPSG:900913");
+        
+        var map, layer, OLbounds, overLayed;
+        function init(){
+        	var lon = 12.337;
+            var lat = 45.435;
+            var initialzoom = 14;
+
+            var overLayed =  new ovrLay.Layer("Heatmap");
+            
+            map = new OpenLayers.Map( 'map' );
+            OLbounds = new OpenLayers.Bounds();
+            layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
+
+//add kml
+ var olKML = new OpenLayers.Layer.Vector("KML", {
+                strategies: [new OpenLayers.Strategy.Fixed()],
+                protocol: new OpenLayers.Protocol.HTTP({
+                    url: "maps/StudyArea.kml",
+                    format: new OpenLayers.Format.KML({
+                        extractStyles: true, 
+                        extractAttributes: true,
+                        maxDepth: 2
+                    })
+                })
+            })    
+
+            //make map
+            map.addLayers([layer, overLayed, olKML]);
+            map.setCenter(
+                    new OpenLayers.LonLat(lon, lat).transform(  EPSG4326, map.getProjectionObject()), 15);
+
+           
+
+        }
+
+
+
+
+        
+    </script>
+    
+    <script src="jquery-1.6.4.js"></script>
+<script src="logIt.js"></script>
+<script src="aNode.js"></script>
+<script src="parseOSM.js"></script>
+<script src="agent.js"></script>
+<script src="randomWalkers.js"></script>
+<script>
+var walkers = null;
+var proxyOpenStreetMaps = "http://127.0.0.1/cgi-bin/proxy.py?url=http://api.openstreetmap.org/api/0.6/map?bbox=12.32,45.42,12.325,45.43";
+function done()
+{
+	drawMap();
+	walkers = new randomWalkers(_nodes, _bounds,{population:10000});
+	start();	
+}
+
+//call this when the document is ready to load
+$(document).ready(
+		function(){logIt("ready to load file...");
+				initXML('maps/venice.osm', done);
+				}
+		);
+//this uses the proxy and is really slow, but gets around cross domain bullshit, and fetches a osm file from the server
+//
+//initXML('http://127.0.0.1/cgi-bin/proxy.py?url=http://api.openstreetmap.org/api/0.6/map?bbox=12.32,45.42,12.325,45.43', done);
+
+
+_simTimer = null;
+var start = function()
+{
+	   logIt('starting simulation...');
+	   _simTimer = setInterval(function(){walkers.moveAgents();drawAgentsOnOpenLayers() }, 100);	   
+}
+ var pause = function()
+{
+   	logIt('pausing simulation...');
+    clearInterval(_simTimer);      
+}
+
+ var drawAgentsOnOpenLayers = function()
+ {
+	var canvas = getAgentCanvas();
+
+	ctx = canvas.getContext('2d');
+	ctx.fillStyle = "rgb(0,0,200)";
+	var Wid = canvas.width;
+	var Hei = canvas.height;
+	ctx.clearRect(0,0,Wid,Hei);
+
+	// this was taken verbatim from  http://www.websitedev.de/temp/openlayers-heatmap-layer.html
+	// Pick some point on the map and use it to determine the offset
+    // between the map's 0,0 coordinate and the layer's 0,0 position.
+    var someLoc = new OpenLayers.LonLat(0,0);
+    var offsetX = map.getViewPortPxFromLonLat(someLoc).x -
+                  map.getLayerPxFromLonLat(someLoc).x;
+    var offsetY = map.getViewPortPxFromLonLat(someLoc).y -
+                  map.getLayerPxFromLonLat(someLoc).y;
+
+	
+	var ag,ltln,ol_ltln,ol_vp;
+	for( var i = 0; i < walkers.agents.length; i++){
+		ag = walkers.agents[i];
+//var ndName;
+	//for ( var i = 0; i < _nodes.list.length; i++) {
+		// draw _nodes
+		//ndName = _nodes.list[i];
+		//ag = _nodes[ndName];
+		ltln = ag.getLatLng();
+		ol_ltln = new OpenLayers.LonLat(ltln[1], ltln[0]).transform(   EPSG4326, map.getProjectionObject() );
+		ol_vp = map.getViewPortPxFromLonLat( ol_ltln);
+		ctx.fillRect(ol_vp.x, ol_vp.y, 3, 3);
+
+	    canvas.style.left = (-offsetX) + 'px';
+	    canvas.style.top = (-offsetY) + 'px';
+
+	}
+	ctx.stroke();
+	//console.log(ol_vp);
+ }
+
+ function getAgentCanvas()
+ {
+		//TODO: make this store the canvas 
+
+	var canvas = document.getElementsByClassName('agentCanvas');
+	
+	if(!canvas || canvas.length <= 0)
+			canvas = document.getElementById('ovrLay_canvas');
+	if( !canvas || canvas.length <= 0){
+		logIt("ERROR: can't draw with out an agent canvas specified", 1);
+		return;
+	}
+	if(canvas.length > 0)
+		canvas = canvas[0];
+
+	return canvas;
+ }
+</script>
+    
+</head>
+ <body onload="init()">
+     <div id="map" class="smallmap"></div>
+     <div style=" background-color:#ededed;position:relative;
+  border:1px solid black;
+  opacity:1.0; left:0px; width:600px">
+  
+  <a href="javascript:pause()">pause</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:start()">start</a>
+
+  <div class="logBox"></div>
+  </div>
+  <div style="position:relative;left:0px;top:10px;">
+
+
+</body>
+</html>

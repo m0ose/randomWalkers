@@ -1,0 +1,65 @@
+<html>
+<head>
+<script src="jquery-1.6.4.js"></script>
+<script src="logIt.js"></script>
+<script src="aNode.js"></script>
+<script src="parseOSM.js"></script>
+<script src="agent.js"></script>
+<script src="randomWalkers.js"></script>
+<script>
+var walkers = null;
+var proxyOpenStreetMaps = "http://127.0.0.1/cgi-bin/proxy.py?url=http://api.openstreetmap.org/api/0.6/map?bbox=12.32,45.42,12.325,45.43";
+function done()
+{
+	drawMap();
+	walkers = new randomWalkers(_nodes, _bounds,{population:750});
+	start();	
+}
+
+//call this when the document is ready to load
+$(document).ready(
+		function(){logIt("ready to load file...");
+				initXML('maps/map3.osm', done)}
+		);
+//this uses the proxy and is really slow, but gets around cross domain bullshit, and fetches a osm file from the server
+//
+//initXML('http://127.0.0.1/cgi-bin/proxy.py?url=http://api.openstreetmap.org/api/0.6/map?bbox=12.32,45.42,12.325,45.43', done);
+
+
+_simTimer = null;
+var start = function()
+{
+	   logIt('starting simulation...');
+	   _simTimer = setInterval(function(){walkers.moveAgents(); walkers.drawAgents()}, 100);	   
+}
+ var pause = function()
+{
+   	logIt('pausing simulation...');
+    clearInterval(_simTimer);      
+}
+
+
+</script>
+</head>
+<body>
+</body>
+<div>
+<div style="position:relative;left:0px;top:10px;">
+<canvas class='agentCanvas' width='600px' height='600px' id="agentCanvas" 
+style="z-index: 2;position:absolute;left:0px;top:0px;"></canvas>
+<canvas class="mapCanvas" width='600px' height='600px' id="mapCanvas"
+style="z-index: 1;position:absolute;left:0px;top:0px;"></canvas>
+</div>
+</div>
+<br>
+
+<div style=" background-color:#ededed;position:relative;
+  border:1px solid black;
+  opacity:1.0; left:600px; width:400px">
+  
+  <a href="javascript:pause()">pause</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:start()">start</a>
+
+  <div class="logBox"></div>
+  </div>
+
+</html>

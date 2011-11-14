@@ -1,0 +1,57 @@
+<!-- 
+this is going to come in handy for this
+        map2.setCenter(new OpenLayers.LonLat(-8233165.3575055, 4980298.21113769), 4);
+map2.getViewPortPxFromLonLat(new OpenLayers.LonLat(-8233165.3575055, 4980298.21113769))
+
+//from http://openlayers.org/dev/examples/kml-pointtrack.js
+    var mercator = new OpenLayers.Projection("EPSG:900913");
+    var geographic = new OpenLayers.Projection("EPSG:4326");
+center: new OpenLayers.LonLat(-93.2735, 44.8349).transform(geographic, mercator),
+
+NOTE : good source of source code
+http://sloweb.org.uk/ollie/heatmap/
+
+ -->
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="openLayers/OpenLayers.js"></script>
+    <script src="overLaytest1.js"></script>
+    <link rel="stylesheet" href="openLayers/theme/default/style_small.css" type="text/css">
+   
+    <script type="text/javascript">
+    var EPSG4326 = new OpenLayers.Projection("EPSG:4326");
+    var EPSG900913 = new OpenLayers.Projection("EPSG:900913");
+        
+        var map, layer, OLbounds, overLayed;
+        function init(){
+        	var lon = 12.337;
+            var lat = 45.435;
+            var initialzoom = 14;
+
+            var overLayed =  new ovrLay.Layer("Heatmap");
+            
+            map = new OpenLayers.Map( 'map' );
+            OLbounds = new OpenLayers.Bounds();
+            layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
+
+            map.addLayers([layer, overLayed]);
+            map.setCenter(
+                    new OpenLayers.LonLat(lon, lat).transform(  EPSG4326, map.getProjectionObject()), 15
+                );    
+
+        }
+
+
+
+
+        
+    </script>
+</head>
+ <body onload="init()">
+     <div id="map" class="smallmap"></div>
+
+</body>
+</html>

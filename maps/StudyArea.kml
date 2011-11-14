@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2">
+<Document>
+  <name>Study Area</name>
+  <description><![CDATA[WPI Venice Project Center 2011 Mobility Team San Marco Study Area Map - Node Placement
+Contained Components: Bridges, Traghetto Stops]]></description>
+  <Style id="style25">
+    <LineStyle>
+      <color>40000000</color>
+      <width>3</width>
+    </LineStyle>
+    <PolyStyle>
+      <color>73FF0000</color>
+      <fill>1</fill>
+      <outline>1</outline>
+    </PolyStyle>
+  </Style>
+  <Style id="style1">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style31">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style2">
+    <LineStyle>
+      <color>40000000</color>
+      <width>3</width>
+    </LineStyle>
+    <PolyStyle>
+      <color>73FF0000</color>
+      <fill>1</fill>
+      <outline>1</outline>
+    </PolyStyle>
+  </Style>
+  <Style id="style7">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style19">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style28">
+    <LineStyle>
+      <color>40000000</color>
+      <width>3</width>
+    </LineStyle>
+    <PolyStyle>
+      <color>73FF0000</color>
+      <fill>1</fill>
+      <outline>1</outline>
+    </PolyStyle>
+  </Style>
+  <Style id="style16">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style4">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style14">
+    <LineStyle>
+      <color>40000000</color>
+      <width>3</width>
+    </LineStyle>
+    <PolyStyle>
+      <color>73FF0000</color>
+      <fill>1</fill>
+      <outline>1</outline>
+    </PolyStyle>
+  </Style>
+  <Style id="style9">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style11">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style6">
+    <LineStyle>
+      <color>40000000</color>
+      <width>3</width>
+    </LineStyle>
+    <PolyStyle>
+      <color>73FF0000</color>
+      <fill>1</fill>
+      <outline>1</outline>
+    </PolyStyle>
+  </Style>
+  <Style id="style29">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style22">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style20">
+    <LineStyle>
+      <color>40000000</color>
+      <width>3</width>
+    </LineStyle>
+    <PolyStyle>
+      <color>73FF0000</color>
+      <fill>1</fill>
+      <outline>1</outline>
+    </PolyStyle>
+  </Style>
+  <Style id="style30">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style17">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style13">
+    <LineStyle>
+      <color>40000000</color>
+      <width>3</width>
+    </LineStyle>
+    <PolyStyle>
+      <color>73FF0000</color>
+      <fill>1</fill>
+      <outline>1</outline>
+    </PolyStyle>
+  </Style>
+  <Style id="style27">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style23">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style18">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/marina.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style3">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style21">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style12">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/marina.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style5">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style15">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style24">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/marina.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style26">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style8">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style10">
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/mapfiles/ms2/micons/marina.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Placemark>
+    <name>Bridge 1</name>
+    <description><![CDATA[<div dir="ltr">Contained Nodes: A/B<br>Ponte De</div>]]></description>
+    <styleUrl>#style25</styleUrl>
+    <Polygon>
+      <outerBoundaryIs>
+        <LinearRing>
+          <tessellate>1</tessellate>
+          <coordinates>
+            12.333490,45.435574,0.000000
+            12.333627,45.435646,0.000000
+            12.333669,45.435612,0.000000
+            12.333531,45.435539,0.000000
+            12.333490,45.435574,0.000000
+          </coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Node A</name>
+    <description><![CDATA[<div dir="ltr">Node A<br>Bridge 1 - Ponte de<br>Node Pair: AB</div>]]></description>
+    <styleUrl>#style1</styleUrl>
+    <Point>
+      <coordinates>12.333535,45.435566,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Node B</name>
+    <description><![CDATA[<div dir="ltr">Node B<br>Bridge 1 - Ponte de<br>Node Pair: AB</div>]]></description>
+    <styleUrl>#style31</styleUrl>
+    <Point>
+      <coordinates>12.333625,45.435619,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Bridge 2</name>
+    <description><![CDATA[<div dir="ltr">Contained Nodes: C/D<br>Ponte de</div>]]></description>
+    <styleUrl>#style2</styleUrl>
+    <Polygon>
+      <outerBoundaryIs>
+        <LinearRing>
+          <tessellate>1</tessellate>
+          <coordinates>
+            12.333776,45.435265,0.000000
+            12.333848,45.435333,0.000000
+            12.333879,45.435299,0.000000
+            12.333800,45.435234,0.000000
+            12.333776,45.435265,0.000000
+          </coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Node C</name>
+    <description><![CDATA[<div dir="ltr">Node C<br>Bridge 2 - Ponte de<br>Node Pair: CD</div>]]></description>
+    <styleUrl>#style7</styleUrl>
+    <Point>
+      <coordinates>12.333806,45.435265,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Node D</name>
+    <description><![CDATA[<div dir="ltr">Node D<br>Bridge 2 - Ponte de<br>Node Pair: CD</div>]]></description>
+    <styleUrl>#style19</styleUrl>
+    <Point>
+      <coordinates>12.333843,45.435303,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Bridge 3</name>
+    <description><![CDATA[<div dir="ltr">Contained Nodes: E/F<br>Ponte de</div>]]></description>
+    <styleUrl>#style28</styleUrl>
+    <Polygon>
+      <outerBoundaryIs>
+        <LinearRing>
+          <tessellate>1</tessellate>
+          <coordinates>
+            12.333834,45.435135,0.000000
+            12.333979,45.435184,0.000000
+            12.334000,45.435154,0.000000
+            12.333849,45.435104,0.000000
+            12.333834,45.435135,0.000000
+          </coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Node E</name>
+    <description><![CDATA[<div dir="ltr">Node E<br>Bridge 3 - Ponte de<br>Node Pair: EF</div>]]></description>
+    <styleUrl>#style16</styleUrl>
+    <Point>
+      <coordinates>12.333865,45.435127,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Node F</name>
+    <description><![CDATA[<div dir="ltr">Node F<br>Bridge 3 - Ponte de<br>Node Pair: EF</div>]]></description>
+    <styleUrl>#style4</styleUrl>
+    <Point>
+      <coordinates>12.333964,45.435162,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Bridge 4</name>
+    <description><![CDATA[<div dir="ltr">Contained Nodes: G/H<br>Ponte de</div>]]></description>
+    <styleUrl>#style14</styleUrl>
+    <Polygon>
+      <outerBoundaryIs>
+        <LinearRing>
+          <tessellate>1</tessellate>
+          <coordinates>
+            12.334752,45.434193,0.000000
+            12.334848,45.434219,0.000000
+            12.334858,45.434193,0.000000
+            12.334755,45.434166,0.000000
+            12.334752,45.434193,0.000000
+          </coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Node G</name>
+    <description><![CDATA[<div dir="ltr">Node G<br>Bridge 4 - Ponte de<br>Node pair: GH</div>]]></description>
+    <styleUrl>#style9</styleUrl>
+    <Point>
+      <coordinates>12.334772,45.434185,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Node H</name>
+    <description><![CDATA[<div dir="ltr">Node H<br>Bridge 4 - Ponte de<br>Node Pair: GH</div>]]></description>
+    <styleUrl>#style11</styleUrl>
+    <Point>
+      <coordinates>12.334828,45.434200,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Bridge 5</name>
+    <description><![CDATA[<div dir="ltr">Contained Nodes: I/J<br>Ponte de</div>]]></description>
+    <styleUrl>#style6</styleUrl>
+    <Polygon>
+      <outerBoundaryIs>
+        <LinearRing>
+          <tessellate>1</tessellate>
+          <coordinates>
+            12.334865,45.433887,0.000000
+            12.335001,45.433929,0.000000
+            12.335012,45.433903,0.000000
+            12.334874,45.433861,0.000000
+            12.334865,45.433887,0.000000
+          </coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Node I</name>
+    <description><![CDATA[<div dir="ltr">Node I<br>Bridge 5 - Ponte de<br>Node Pair: IJ</div>]]></description>
+    <styleUrl>#style29</styleUrl>
+    <Point>
+      <coordinates>12.334899,45.433884,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Node J</name>
+    <description><![CDATA[<div dir="ltr">Node J<br>Bridge 5 - Ponte de<br>Node Pair: IJ</div>]]></description>
+    <styleUrl>#style22</styleUrl>
+    <Point>
+      <coordinates>12.334980,45.433910,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Bridge 6</name>
+    <description><![CDATA[<div dir="ltr">Contained Nodes: K/L<br>Ponte de</div>]]></description>
+    <styleUrl>#style20</styleUrl>
+    <Polygon>
+      <outerBoundaryIs>
+        <LinearRing>
+          <tessellate>1</tessellate>
+          <coordinates>
+            12.335469,45.433067,0.000000
+            12.335659,45.433094,0.000000
+            12.335671,45.433044,0.000000
+            12.335478,45.433025,0.000000
+            12.335469,45.433067,0.000000
+          </coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Node K</name>
+    <description><![CDATA[<div dir="ltr">Node K<br>Bridge 6 - Ponte de<br>Node Pair: KL</div>]]></description>
+    <styleUrl>#style30</styleUrl>
+    <Point>
+      <coordinates>12.335525,45.433052,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Node L</name>
+    <description><![CDATA[<div dir="ltr">Node L<br>Bridge 6 - Ponte de<br>Node Pair: KL</div>]]></description>
+    <styleUrl>#style17</styleUrl>
+    <Point>
+      <coordinates>12.335621,45.433064,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Bridge 7</name>
+    <description><![CDATA[Contained Nodes: M/N<div>Ponte dell'Academia</div>]]></description>
+    <styleUrl>#style13</styleUrl>
+    <Polygon>
+      <outerBoundaryIs>
+        <LinearRing>
+          <tessellate>1</tessellate>
+          <coordinates>
+            12.328701,45.431438,0.000000
+            12.328774,45.431408,0.000000
+            12.329161,45.431904,0.000000
+            12.329092,45.431931,0.000000
+            12.328701,45.431438,0.000000
+          </coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Node M</name>
+    <description><![CDATA[Node M<div>Bridge 7 - Ponte dell'Academia</div><div>Node Pair: MN</div>]]></description>
+    <styleUrl>#style27</styleUrl>
+    <Point>
+      <coordinates>12.328801,45.431515,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Node N</name>
+    <description><![CDATA[Node N<div>Bridge 7 - Ponte dell'Academia</div><div>Node Pair: MN</div>]]></description>
+    <styleUrl>#style23</styleUrl>
+    <Point>
+      <coordinates>12.329095,45.431885,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Sant&#39;Angelo</name>
+    <description><![CDATA[<div dir="ltr">Traghetto Stop 1<br>Address: 30124 Venezia, Italia<br>Contained Nodes: O/P</div>]]></description>
+    <styleUrl>#style18</styleUrl>
+    <ExtendedData>
+      <Data name="PlaceName">
+        <value></value>
+      </Data>
+      <Data name="Address">
+        <value></value>
+      </Data>
+      <Data name="Phone">
+        <value></value>
+      </Data>
+      <Data name="Website">
+        <value></value>
+      </Data>
+    </ExtendedData>
+    <Point>
+      <coordinates>12.329509,45.435303,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Node O</name>
+    <description><![CDATA[<div dir="ltr">Node O<br>Traghetto Stop 1 - Sant'Angelo<br>Node Pair: OP</div>]]></description>
+    <styleUrl>#style3</styleUrl>
+    <Point>
+      <coordinates>12.329704,45.435089,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Node P</name>
+    <description><![CDATA[<div dir="ltr">Node P<br>Traghetto Stop 2 - Sant'Angelo<br>Node Pair: OP</div>]]></description>
+    <styleUrl>#style21</styleUrl>
+    <Point>
+      <coordinates>12.329535,45.435322,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>San Samuele</name>
+    <description><![CDATA[<div>Traghetto Stop 2</div>Address: 30124 Venezia, Italy<br><div>Contained Nodes: Q/R</div>]]></description>
+    <styleUrl>#style12</styleUrl>
+    <Point>
+      <coordinates>12.327740,45.433254,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Node Q</name>
+    <description><![CDATA[<div dir="ltr">Node Q<br>Traghetto Stop 2 - San Samuele<br>Node Pair: QR</div>]]></description>
+    <styleUrl>#style5</styleUrl>
+    <Point>
+      <coordinates>12.327827,45.433296,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Node R</name>
+    <description><![CDATA[<div dir="ltr">Node R<br>Traghetto Stop 2 - San Samuele<br>Node Pair: QR</div>]]></description>
+    <styleUrl>#style15</styleUrl>
+    <Point>
+      <coordinates>12.327721,45.433235,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Campo del Traghetto</name>
+    <description><![CDATA[<div>Traghetto Stop 3</div>Address: 30124 Venezia, Italy<br><div>Contained Nodes: S/T</div>]]></description>
+    <styleUrl>#style24</styleUrl>
+    <Point>
+      <coordinates>12.333000,45.431595,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Node S</name>
+    <description><![CDATA[Node S<div>Traghetto Stop 3 - Campo del Traghetto</div><div>Node Pair: ST</div>]]></description>
+    <styleUrl>#style26</styleUrl>
+    <Point>
+      <coordinates>12.332993,45.431656,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Node T</name>
+    <description><![CDATA[Node T<div>Traghetto Stop 3 - Campo del Traghetto</div><div>Node Pair: ST</div>]]></description>
+    <styleUrl>#style8</styleUrl>
+    <Point>
+      <coordinates>12.333002,45.431583,0.000000</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Riva del Carbon</name>
+    <description><![CDATA[30124 Venezia, Italy<br>]]></description>
+    <styleUrl>#style10</styleUrl>
+    <Point>
+      <coordinates>12.334184,45.436649,0.000000</coordinates>
+    </Point>
+  </Placemark>
+</Document>
+</kml>
