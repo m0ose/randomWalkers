@@ -3,6 +3,13 @@
 // Node
 // edges : a list of nodes connected to this. basically edges
 // x,y : normalised coordinates. 0 to 1. used mostly for drawing
+var _nodes = {
+	list : [],
+	getNode: function(str) {
+		return this[str];
+	},
+};
+
 function node(id, lat, lon, myBounds) {
 	this.id = id;
 	this.lat = Number(lat);
@@ -14,6 +21,7 @@ function node(id, lat, lon, myBounds) {
 	//		+ (1.0 - Math.cos(_ang2rad * this.lat)) / 2;
 	this.y = (_bounds.maxlat - this.lat) / (_bounds.maxlat - _bounds.minlat);
 	this.edges = [];
+	this.type = null;
 	this.addEdge = function(nodeId) {
 		this.edges.push(nodeId);
 	}

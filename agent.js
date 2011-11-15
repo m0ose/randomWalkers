@@ -9,7 +9,7 @@ function agent( homeNode)
 	this.lat = homeNode.lat;
 	this.lon = homeNode.lon;
 	this.destNode = null;
-	this.speed = 0.003;
+	this.speed = 0.001;
 	this.dx = null;
 	this.dy = null;
 	this.distanceToNext = null;

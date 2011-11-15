@@ -13,11 +13,7 @@
 var xmlData = null;
 var _bounds = {};
 var _ang2rad = Math.PI / 360.0;
-// _nodes is an object with every node as a member variable
-// list holds a list of all the node names
-var _nodes = {
-	list : []
-};
+
 
 
 // draw
@@ -43,21 +39,49 @@ function drawMap(canvas) {
 	var ndName = null, neighbor = null;
 
 	//
-	// Draw some nodes
+	// Draw some edges
 	for ( var i = 0; i < _nodes.list.length; i++) {
-		// draw _nodes
 		ndName = _nodes.list[i];
 		nd = _nodes[ndName];
-		ctx.fillRect(nd.x * Wid, nd.y * Hei, 1, 1);
 		// draw edges
 		ctx.beginPath();
 		for ( var n = 0; n < nd.edges.length; n++) {
+			if(nd.distances){
+				ctx.strokeStyle = "rgb(0,255,0)";
+				ctx.lineWidth = 2;
+			}
+			else{
+				ctx.strokeStyle = "rgb(0,0,0)";
+				ctx.lineWidth = 1;
+			}
+			
 			ctx.moveTo(nd.x * Wid, nd.y * Hei);
 			neighbor = _nodes[nd.edges[n]];
 			ctx.lineTo(neighbor.x * Wid, neighbor.y * Hei);
 		}
 		ctx.stroke();
-
+	}
+	//
+	// Draw some nodes
+	for (  i = 0; i < _nodes.list.length; i++) {
+		ndName = _nodes.list[i];
+		nd = _nodes[ndName];
+		if(nd.type == "way"){
+			ctx.fillStyle = "rgb(0,0,0)";
+			ctx.fillRect(nd.x * Wid, nd.y * Hei, 2, 2);
+		}
+		else if(nd.type == "amenity"){
+			ctx.fillStyle = "rgb(10,100,255)";
+			ctx.fillRect(nd.x * Wid, nd.y * Hei, 5, 5);
+		}
+		else if(nd.type == "tourism"){
+			ctx.fillStyle = "rgb(255,100,10)";
+			ctx.fillRect(nd.x * Wid, nd.y * Hei, 5, 5);
+		}
+		else{
+			ctx.fillStyle = "rgb(0,64,0)";
+			ctx.fillRect(nd.x * Wid, nd.y * Hei, 2, 2);
+		}
 	}
 }
 
@@ -106,11 +130,23 @@ function initXML(filename, doneCallback) {
 		logIt(xmlData.getElementsByTagName('relation').length + " relations, " + xmlData.getElementsByTagName('member').length + " members, " + xmlData.getElementsByTagName('tag').length + " tags");
 
 		// collect nodes
+		var tagsTmp=[], tagType;
 		var xNodes = xmlData.getElementsByTagName('node');
 		for ( var i = 0; i < xNodes.length; i++) {
 			var tmp = xNodes[i];
 			var newNode = new node(tmp.getAttribute('id'), tmp
 					.getAttribute('lat'), tmp.getAttribute('lon'), _bounds);
+			
+			tagsTmp = tmp.getElementsByTagName('tag');
+			for( var i2 = 0 ; i2 < tagsTmp.length; i2++){
+				tagType = tagsTmp[i2].getAttribute('k');
+				if(tagType == "amenity")
+					newNode.type="amenity";
+				if(tagType == "shop")
+					newNode.type="amenity";
+				if(tagType == "tourism")
+					newNode.type="tourism";
+			}
 			// i think this puts it in a hash table
 			_nodes[newNode.id] = newNode;
 			_nodes.list.push(newNode.id);
@@ -142,19 +178,22 @@ function initXML(filename, doneCallback) {
 				}
 			}
 			// if a highway tag was found it is good.
-			// i'm currently only interested in highways. they include bridges
-			// and footpaths.
+			// i'm currently only interested in highways. (they include bridges
+			// and footpaths.)
 			if (isHighway) {
 				var wayNodes = wa.getElementsByTagName('nd');
 				var nodeId, prevnodeId, nextnodeId;
 				for (j = 0; j < wayNodes.length; j++) {
 					nodeId = wayNodes[j].getAttribute('ref');
+					if(_nodes[nodeId].type == "amenity")
+						console.log("amenity is road?");
+					_nodes[nodeId].type = "way";
 					// if its not the first element on a way
 					if (j != 0) {
 						prevnodeId = wayNodes[j - 1].getAttribute('ref');
 						_nodes[nodeId].addEdge(prevnodeId);
 					}
-					// if its the last element on a way
+					// if its not the last element on a way
 					if (j < wayNodes.length - 1) {
 						nextnodeId = wayNodes[j + 1].getAttribute('ref');
 						_nodes[nodeId].addEdge(nextnodeId);
