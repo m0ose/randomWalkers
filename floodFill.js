@@ -1,3 +1,15 @@
+/*
+ * 
+ * 
+ *  Developer : Cody Smith . Date : 14.NOV.2011 . All code © 2011 RedfishGroup LLC, all rights reserved 
+ * 
+ *  flood fill. 
+ *     usgage: floodFill( sourcenodename); it puts an object on the node called distances, with the total distance from the root node
+ *       node.distances['sourcenodename'] = total distance from sourcenode
+ *    testFloodFill()  ; tests and draws.
+ *      
+ */
+
 function floodFill(srcNodeName)
 {
 	var nodes = _nodes;

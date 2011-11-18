@@ -1,14 +1,23 @@
 	/* * Developer : Cody Smith * Date : 7.NOV.2011 * All code © 2011 RedfishGroup LLC, all rights reserved */
 
-// Node
-// edges : a list of nodes connected to this. basically edges
-// x,y : normalised coordinates. 0 to 1. used mostly for drawing
+//
+// quick and dirty hash table
+//
 var _nodes = {
 	list : [],
 	getNode: function(str) {
 		return this[str];
 	},
+	insert: function( node1){
+		this[node1.id] = node1;
+		this.list.push(node1.id);
+	},
 };
+
+
+//Node
+//edges : a list of nodes connected to this. basically edges
+//x,y : normalised coordinates. 0 to 1. used mostly for drawing
 
 function node(id, lat, lon, myBounds) {
 	this.id = id;
@@ -25,6 +34,7 @@ function node(id, lat, lon, myBounds) {
 	this.addEdge = function(nodeId) {
 		this.edges.push(nodeId);
 	}
+	this.getEdges = function(){ return this.edges ;}
 	this.getEdge = function( n){
 		if( n < this.edges.length )
 			return _nodes[this.edges[n]];
@@ -39,9 +49,11 @@ function node(id, lat, lon, myBounds) {
 	{
 		return convertFromModelToLatLng(this.x,this.y);
 	}
-
+	this.checkin = function(){	return false;}
+	this.checkout = function(){return true;}
 	return this;
 }
+
 
 function convertLatLngToModelCoords( lat,lon)
 {

@@ -9,14 +9,17 @@ function agent( homeNode)
 	this.lat = homeNode.lat;
 	this.lon = homeNode.lon;
 	this.destNode = null;
-	this.speed = 0.001;
+	this.speed = 0.003;
 	this.dx = null;
 	this.dy = null;
 	this.distanceToNext = null;
 	this.stepsToNextNode = 0;
 	this.histLength = 5;//memory of past paths 
 	this.history = new Array( this.histLength);
+	this.sleeping = false;
 	
+	//private
+	//TODO: this would be faster as a heap or something
 	this.checkVisited = function( nodeId)
 	{
 		for( var i = this.history.length - 1; i >= 0; i--){
@@ -40,9 +43,9 @@ function agent( homeNode)
 	
 	this.chooseDestination = function()
 	{
-		var rnd = Math.floor(Math.random() * this.homeNode.edges.length );
-		for( var i = 0 ; i < this.homeNode.edges.length; i++){
-			rnd = (rnd+1)%this.homeNode.edges.length;
+		var rnd = Math.floor(Math.random() * this.homeNode.getEdges().length );
+		for( var i = 0 ; i < this.homeNode.getEdges().length; i++){
+			rnd = (rnd+1)%this.homeNode.getEdges().length;
 			if( !this.checkVisited( this.homeNode.getEdgeName( rnd )  ))
 				return this.homeNode.getEdge(rnd );
 		}
@@ -75,13 +78,29 @@ function agent( homeNode)
 
 	this.move = function()
 	{
-		this.stepsToNextNode = this.stepsToNextNode - 1;
-		this.x += this.dx;
-		this.y += this.dy;
-		this .updateLatLng();
-
-		if(this.stepsToNextNode <= 0 )
-			this.imAtDestination();
+		if(this.sleeping){
+			if(this.homeNode.checkout()){
+				this.sleeping = false;
+				//console.log(this.homeNode.id +" != " +this.destNode.id);
+				this.homeNode.occupants--;
+			}
+		}
+		else{
+			if(this.stepsToNextNode <= 0 ){
+				this.imAtDestination();
+				if(this.homeNode.checkin()){
+					this.sleeping = true;
+					this.homeNode.occupants++;
+				}
+			}
+			else{
+				this.stepsToNextNode = this.stepsToNextNode - 1;
+				this.x += this.dx;
+				this.y += this.dy;
+				this.updateLatLng();
+			}
+		}
+		
 	}
 	
 	this.updateLatLng = function()

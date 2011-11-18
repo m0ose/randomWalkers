@@ -1,5 +1,6 @@
-	/* * Developer : Cody Smith * Date : 7.NOV.2011 * All code © 2011 RedfishGroup LLC, all rights reserved */
+/* * Developer : Cody Smith * Date : 7.NOV.2011 * All code © 2011 RedfishGroup LLC, all rights reserved */
 
+var _timeOfDay = 14; //0 is midnight , 12 is noon
 function randomWalkers(nodes, bounds, options)
 {
 
@@ -55,8 +56,15 @@ function randomWalkers(nodes, bounds, options)
 		return agents;
 	}	
 	
+	this.moveClockForward = function( amount)
+	{
+		if(!amount) amount = 0.01;
+		_timeOfDay += amount;
+	}
+	
 	this.moveAgents = function()
 	{
+		this.moveClockForward();
 		for( var i = this.agents.length - 1; i >= 0; i--){
 			this.agents[i].move();
 		}

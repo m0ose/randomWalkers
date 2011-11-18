@@ -7,7 +7,9 @@
  *   cody smith
  *   
  *   requires jquery to be loaded first
- * 
+ *   
+ *    function drawMap(canvas) 
+ *    initXML(filename, doneCallback) 
  */
 //globals
 var xmlData = null;
@@ -16,74 +18,6 @@ var _ang2rad = Math.PI / 360.0;
 
 
 
-// draw
-function drawMap(canvas) {
-
-	logIt('drawMap called')
-	//TODO: make this store the canvas 
-	if (!canvas){
-			canvas = document.getElementsByClassName('mapCanvas');
-	}
-	if( !canvas || canvas.length <= 0){
-		logIt("ERROR: can't draw with out a canvas specified", 1);
-		return;
-	}
-	if(canvas.length > 0)
-		canvas = canvas[0];
-	// prepare the canvas
-	ctx = canvas.getContext('2d');
-	ctx.fillStyle = "rgb(200,0,0)";
-	var Wid = canvas.width;
-	var Hei = canvas.height;
-	var nd = null;
-	var ndName = null, neighbor = null;
-
-	//
-	// Draw some edges
-	for ( var i = 0; i < _nodes.list.length; i++) {
-		ndName = _nodes.list[i];
-		nd = _nodes[ndName];
-		// draw edges
-		ctx.beginPath();
-		for ( var n = 0; n < nd.edges.length; n++) {
-			if(nd.distances){
-				ctx.strokeStyle = "rgb(0,255,0)";
-				ctx.lineWidth = 2;
-			}
-			else{
-				ctx.strokeStyle = "rgb(0,0,0)";
-				ctx.lineWidth = 1;
-			}
-			
-			ctx.moveTo(nd.x * Wid, nd.y * Hei);
-			neighbor = _nodes[nd.edges[n]];
-			ctx.lineTo(neighbor.x * Wid, neighbor.y * Hei);
-		}
-		ctx.stroke();
-	}
-	//
-	// Draw some nodes
-	for (  i = 0; i < _nodes.list.length; i++) {
-		ndName = _nodes.list[i];
-		nd = _nodes[ndName];
-		if(nd.type == "way"){
-			ctx.fillStyle = "rgb(0,0,0)";
-			ctx.fillRect(nd.x * Wid, nd.y * Hei, 2, 2);
-		}
-		else if(nd.type == "amenity"){
-			ctx.fillStyle = "rgb(10,100,255)";
-			ctx.fillRect(nd.x * Wid, nd.y * Hei, 5, 5);
-		}
-		else if(nd.type == "tourism"){
-			ctx.fillStyle = "rgb(255,100,10)";
-			ctx.fillRect(nd.x * Wid, nd.y * Hei, 5, 5);
-		}
-		else{
-			ctx.fillStyle = "rgb(0,64,0)";
-			ctx.fillRect(nd.x * Wid, nd.y * Hei, 2, 2);
-		}
-	}
-}
 
 function initXML(filename, doneCallback) {
 	// load open street maps .osm xml file
@@ -148,8 +82,9 @@ function initXML(filename, doneCallback) {
 					newNode.type="tourism";
 			}
 			// i think this puts it in a hash table
-			_nodes[newNode.id] = newNode;
-			_nodes.list.push(newNode.id);
+			_nodes.insert( newNode);
+			//_nodes[newNode.id] = newNode;
+			//_nodes.list.push(newNode.id);
 		}
 
 		//
@@ -185,8 +120,6 @@ function initXML(filename, doneCallback) {
 				var nodeId, prevnodeId, nextnodeId;
 				for (j = 0; j < wayNodes.length; j++) {
 					nodeId = wayNodes[j].getAttribute('ref');
-					if(_nodes[nodeId].type == "amenity")
-						console.log("amenity is road?");
 					_nodes[nodeId].type = "way";
 					// if its not the first element on a way
 					if (j != 0) {
@@ -203,4 +136,83 @@ function initXML(filename, doneCallback) {
 		}// ...i ways
 	}// parse osm
 }// ...initXML
+
+//___________________________________________
+// draw map
+//___________________________________________
+function drawMap(canvas) {
+
+	logIt('drawMap called')
+	//TODO: make this store the canvas 
+	if (!canvas){
+			canvas = document.getElementsByClassName('mapCanvas');
+	}
+	if( !canvas || canvas.length <= 0){
+		logIt("ERROR: can't draw with out a canvas specified", 1);
+		return;
+	}
+	if(canvas.length > 0)
+		canvas = canvas[0];
+	// prepare the canvas
+	ctx = canvas.getContext('2d');
+	ctx.fillStyle = "rgb(200,0,0)";
+	var Wid = canvas.width;
+	var Hei = canvas.height;
+	var nd = null;
+	var ndName = null, neighbor = null;
+
+	//
+	// Draw some edges
+	for ( var i = 0; i < _nodes.list.length; i++) {
+		ndName = _nodes.list[i];
+		nd = _nodes[ndName];
+		// draw edges
+		ctx.beginPath();
+		for ( var n = 0; n < nd.edges.length; n++) {
+			if(nd.distances){
+				ctx.strokeStyle = "rgb(0,255,0)";
+				ctx.lineWidth = 2;
+			}
+			else{
+				ctx.strokeStyle = "rgb(0,0,0)";
+				ctx.lineWidth = 1;
+			}
+			
+			ctx.moveTo(nd.x * Wid, nd.y * Hei);
+			neighbor = _nodes[nd.edges[n]];
+			ctx.lineTo(neighbor.x * Wid, neighbor.y * Hei);
+		}
+		ctx.stroke();
+	}
+	//
+	// Draw some nodes
+	for (  i = 0; i < _nodes.list.length; i++) {
+		ndName = _nodes.list[i];
+		nd = _nodes[ndName];
+		if(nd.type == "way"){
+			ctx.fillStyle = "rgb(0,0,0)";
+			ctx.fillRect(nd.x * Wid, nd.y * Hei, 2, 2);
+		}
+		else if(nd.type == "amenity"){
+			ctx.fillStyle = "rgb(200,100,0)";
+			ctx.fillRect(nd.x * Wid, nd.y * Hei, 5, 5);
+		}
+		else if(nd.type == "tourism"){
+			ctx.fillStyle = "rgb(255,50,10)";
+			ctx.fillRect(nd.x * Wid, nd.y * Hei, 5, 5);
+		}
+		else if(nd.type == "bar"){
+			ctx.fillStyle = "rgba(100,255,10,0.7)";
+			ctx.fillRect(nd.x * Wid, nd.y * Hei, 10, 10);
+		}
+		else if(nd.type == "hotel"){
+			ctx.fillStyle = "rgba(100,200,10,0.7)";
+			ctx.fillRect(nd.x * Wid, nd.y * Hei, 20, 10);
+		}
+		else{
+			ctx.fillStyle = "rgb(0,64,0)";
+			ctx.fillRect(nd.x * Wid, nd.y * Hei, 2, 2);
+		}
+	}
+}
 

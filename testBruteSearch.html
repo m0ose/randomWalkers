@@ -1,0 +1,142 @@
+<html>
+<head>
+<script src="jquery-1.6.4.js"></script>
+<script src="logIt.js"></script>
+<script src="aNode.js"></script>
+<script src="siteNode.js"></script>
+<script src="parseOSM.js"></script>
+<script src="agent.js"></script>
+<script src="randomWalkers.js"></script>
+<script>
+var walkers = null;
+var proxyOpenStreetMaps = "http://127.0.0.1/cgi-bin/proxy.py?url=http://api.openstreetmap.org/api/0.6/map?bbox=12.32,45.42,12.325,45.43";
+function done()
+{
+	drawMap();
+	walkers = new randomWalkers(_nodes, _bounds,{population:905});
+	start();	
+	addNRandomBuildings();
+}
+
+//call this when the document is ready to load
+$(document).ready(
+		function(){logIt("ready to load file...");
+				initXML('maps/map3.osm', done)}
+		);
+//this uses the proxy and is really slow, but gets around cross domain bullshit, and fetches a osm file from the server
+//
+//initXML('http://127.0.0.1/cgi-bin/proxy.py?url=http://api.openstreetmap.org/api/0.6/map?bbox=12.32,45.42,12.325,45.43', done);
+
+
+_simTimer = null;
+var start = function()
+{
+	   logIt('starting simulation...');
+	   _simTimer = setInterval(function(){walkers.moveAgents();
+	   walkers.drawAgents();
+	   var timeDiv = document.getElementById("timeDiv");
+	   if(timeDiv){
+		   var curTime = Math.floor(_timeOfDay%24) + ":"+ Math.floor(60*(_timeOfDay%1)) ;
+		   var str ="time"+ curTime + "\n <br>";
+		   for(var n=0; n<buildings.length; n++){
+			   var bd = buildings[n];
+			   str += bd.id+"  "+bd.occupants + " / " + bd.averageOccupancy+"\n<br>"
+		   }
+		   timeDiv.innerHTML = str;
+	   }
+	   
+	   }, 100);	   
+}
+ var pause = function()
+{
+   	logIt('pausing simulation...');
+    clearInterval(_simTimer);      
+}
+
+
+
+ 
+ 
+ 
+ var buildings = [];
+
+function addNRandomBuildings(num){
+	var start = new Date().getTime();
+
+	//function node(id, lat, lon, myBounds) {
+	logIt("adding " + num + " random nodes");
+	if(!num) num = -1;
+	for( var n = 0 ; n < 10; n++){
+		var lat = _bounds.minlat + Math.random()*_bounds.width;
+		var lon = _bounds.minlon + Math.random()*_bounds.height;
+		var xy =  convertLatLngToModelCoords( lat,lon);
+		var newNode = new siteNode( "bar" + n , lat,lon, _bounds);
+		newNode.type = "bar";
+		buildings.push( newNode);
+		//_nodes.insert(newNode);
+	}
+	for( var n = 0 ; n < 30; n++){
+		var lat = _bounds.minlat + Math.random()*_bounds.width;
+		var lon = _bounds.minlon + Math.random()*_bounds.height;
+		var xy =  convertLatLngToModelCoords( lat,lon);
+		var newNode = new siteNode( "hotel" + n , lat,lon, _bounds,60);
+		newNode.type = "hotel";
+		buildings.push( newNode);
+		//_nodes.insert(newNode);
+	}
+	//find the nearest node
+	var closestNode = null;
+	var closestDist = Number.MAX_VALUE;
+	var dist = 0;
+	var nd = null;
+	for( n=0; n < buildings.length; n++){
+		closestDist = Number.MAX_VALUE;
+		bdNode = buildings[n];
+		for( var i=0; i<_nodes.list.length; i++){
+			nd = _nodes[_nodes.list[i]];
+			if(nd.type == "way"){
+				dist = Math.sqrt(Math.pow(bdNode.x - nd.x ,2) + Math.pow(bdNode.y - nd.y ,2));
+				if( dist < closestDist){
+					closestDist = Number(dist);
+					closestNode = nd;
+				}
+			}
+		}
+		//console.log(closestDist);
+		closestNode.addEdge(bdNode.id);
+		bdNode.addEdge( closestNode.id);
+		_nodes.insert(bdNode);
+
+	}
+	drawMap();
+
+	logIt(" time taken by adding " + num + "buildings<br>");
+	logIt("  " +  (new Date().getTime()) - start );
+}
+	
+
+
+</script>
+</head>
+<body>
+</body>
+<div>
+<div style="position:relative;left:0px;top:10px;">
+<canvas class='agentCanvas' width='600px' height='600px' id="agentCanvas" 
+style="z-index: 2;position:absolute;left:0px;top:0px;"></canvas>
+<canvas class="mapCanvas" width='600px' height='600px' id="mapCanvas"
+style="z-index: 1;position:absolute;left:0px;top:0px;"></canvas>
+</div>
+</div>
+<br>
+
+<div style=" background-color:#ededed;position:relative;
+  border:1px solid black;
+  opacity:1.0; left:600px; width:400px">
+  
+  <a href="javascript:pause()">pause</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:start()">start</a>
+<div id="timeDiv"></div>
+  <div class="logBox"></div>
+  </div>
+
+</html>
